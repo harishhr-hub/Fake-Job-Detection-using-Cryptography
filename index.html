@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fake Job Offer Detector</title>
+    <link rel="stylesheet" href="static/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand-block">
+          <div class="mark" aria-hidden="true">JD</div>
+          <div>
+            <p class="eyebrow">Cyber Verification Lab</p>
+            <h1>JobShield</h1>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item active" type="button" data-screen="home">Home</button>
+          <button class="nav-item" type="button" data-screen="detector">Fake Job Detection</button>
+          <button class="nav-item" type="button" data-screen="history">Detection History</button>
+          <button class="nav-item" type="button" data-screen="about">About</button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <span>Theme</span>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+            <span class="toggle-dot"></span>
+            <span id="themeLabel">Light</span>
+          </button>
+        </div>
+      </aside>
+
+      <section class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">AI, network security, cryptography, and cyber law</p>
+            <h2 id="screenTitle">Home</h2>
+          </div>
+          <button class="secondary-action" id="clearBtn" type="button">Reset detector</button>
+        </header>
+
+        <section class="screen active" id="homeScreen">
+          <div class="home-hero">
+            <div class="hero-copy">
+              <p class="eyebrow">Protect before you accept</p>
+              <h3>Detect suspicious job offers in minutes.</h3>
+              <p>
+                JobShield checks offer text, recruiter email domains, links, payment demands,
+                pressure tactics, and document integrity signals before a candidate takes action.
+              </p>
+              <button class="primary-action compact-action" type="button" data-go="detector">Start detection</button>
+            </div>
+            <div class="hero-metrics" aria-label="Project highlights">
+              <div>
+                <strong>4</strong>
+                <span>Risk layers</span>
+              </div>
+              <div>
+                <strong>SHA-256</strong>
+                <span>Document hash</span>
+              </div>
+              <div>
+                <strong>Local</strong>
+                <span>Browser history</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <span>01</span>
+              <h4>AI Pattern Scoring</h4>
+              <p>Finds deposit requests, instant selection promises, urgent pressure, and identity-data demands.</p>
+            </article>
+            <article class="feature-card">
+              <span>02</span>
+              <h4>Network Checks</h4>
+              <p>Reviews email domains, free-mail senders, HTTP links, shortened links, and domain mismatches.</p>
+            </article>
+            <article class="feature-card">
+              <span>03</span>
+              <h4>Crypto Integrity</h4>
+              <p>Generates a SHA-256 hash so the submitted offer text has a clear integrity fingerprint.</p>
+            </article>
+            <article class="feature-card">
+              <span>04</span>
+              <h4>Cyber Law Guidance</h4>
+              <p>Gives practical evidence-preservation and reporting steps for job fraud cases in India.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="screen" id="detectorScreen">
+          <div class="content-grid">
+            <section class="input-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Detector</p>
+                  <h3>Offer Evidence</h3>
+                </div>
+                <p>Paste the message or upload a plain-text offer letter.</p>
+              </div>
+
+              <label class="field-label" for="companyName">Company name</label>
+              <input id="companyName" class="text-input" type="text" placeholder="Example: Infosys, TCS, Microsoft">
+
+              <label class="field-label" for="officialDomain">Official company domain</label>
+              <input id="officialDomain" class="text-input" type="text" placeholder="Example: company.com">
+
+              <label class="field-label" for="offerText">Offer text or email body</label>
+              <textarea id="offerText" class="offer-box" spellcheck="true" placeholder="Paste the job offer email, message, or extracted offer letter text here..."></textarea>
+
+              <div class="file-row">
+                <label class="file-picker">
+                  <input id="fileInput" type="file" accept=".txt,.text">
+                  <span>Upload .txt</span>
+                </label>
+                <span id="fileName" class="file-name">No file selected</span>
+              </div>
+
+              <button id="analyzeBtn" class="primary-action" type="button">Analyze offer</button>
+            </section>
+
+            <section class="results-panel" aria-live="polite">
+              <div class="score-card">
+                <div>
+                  <p class="eyebrow">Risk score</p>
+                  <output id="riskScore" class="risk-score">0%</output>
+                </div>
+                <span id="verdictBadge" class="badge neutral">Waiting</span>
+              </div>
+
+              <div class="meter" aria-hidden="true">
+                <span id="meterFill"></span>
+              </div>
+
+              <section class="result-block">
+                <h3>Key Findings</h3>
+                <ul id="findingsList" class="findings-list">
+                  <li>Paste an offer and run analysis.</li>
+                </ul>
+              </section>
+
+              <section class="result-block">
+                <h3>Network Security</h3>
+                <div id="networkResults" class="pill-list">
+                  <span class="pill">No links checked yet</span>
+                </div>
+              </section>
+
+              <section class="result-block">
+                <h3>Document Integrity</h3>
+                <div class="crypto-result">
+                  <p><span>SHA-256:</span> <code id="hashOutput">Not calculated</code></p>
+                </div>
+              </section>
+
+              <section class="law-block">
+                <h3>Cyber Law Response</h3>
+                <ol>
+                  <li>Do not pay deposits, training fees, equipment fees, or verification charges.</li>
+                  <li>Preserve screenshots, email headers, phone numbers, account details, UPI IDs, and URLs.</li>
+                  <li>In India, report cyber fraud through cybercrime.gov.in or your local cyber cell.</li>
+                  <li>Inform the real company if its name, logo, or employee identity is being misused.</li>
+                </ol>
+              </section>
+            </section>
+          </div>
+        </section>
+
+        <section class="screen" id="historyScreen">
+          <div class="history-header">
+            <div>
+              <p class="eyebrow">Saved locally</p>
+              <h3>Detection History</h3>
+            </div>
+            <button class="secondary-action" id="clearHistoryBtn" type="button">Clear history</button>
+          </div>
+          <div class="history-list" id="historyList">
+            <p class="empty-state">No detections yet. Run an analysis to create a history entry.</p>
+          </div>
+        </section>
+
+        <section class="screen" id="aboutScreen">
+          <div class="about-grid">
+            <section class="about-panel">
+              <p class="eyebrow">Project objective</p>
+              <h3>AI-Based Fake Job Offer Detector</h3>
+              <p>
+                This project helps job seekers identify fake employment offers by combining text risk
+                analysis, network security checks, cryptographic hashing, and cyber law awareness.
+              </p>
+            </section>
+            <section class="about-panel">
+              <p class="eyebrow">Cyber law context</p>
+              <h3>Reporting and evidence</h3>
+              <p>
+                The app is India-focused for academic use. It references the National Cyber Crime
+                Reporting Portal and IT Act concepts such as identity theft and cheating by personation.
+              </p>
+            </section>
+            <section class="about-panel wide">
+              <p class="eyebrow">Important note</p>
+              <h3>Prototype disclaimer</h3>
+              <p>
+                This tool is a project prototype. It supports decision-making, but it does not replace
+                direct company verification, professional legal advice, or official investigation.
+              </p>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="static/app.js"></script>
+  </body>
+</html>
